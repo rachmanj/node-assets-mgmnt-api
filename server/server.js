@@ -10,7 +10,7 @@ const { jwtStrategy } = require('./middleware/passport');
 
 const { handleError, convertToApiError } = require('./middleware/apiError');
 
-const mongoUri = 'mongodb://localhost:27017/assets_db';
+const mongoUri = 'mongodb://localhost:27017/prata_buc';
 mongoose.connect(mongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -38,7 +38,7 @@ app.use((err, req, res, next) => {
   handleError(err, res);
 });
 
-const port = process.env.PORT || 4001;
+const port = process.env.PORT || 5001;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });

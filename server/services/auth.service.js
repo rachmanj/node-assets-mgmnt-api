@@ -1,4 +1,4 @@
-const User = require('../models/user');
+const { User } = require('../models/user');
 const httpStatus = require('http-status');
 const { ApiError } = require('../middleware/apiError');
 const userService = require('./user.service');
