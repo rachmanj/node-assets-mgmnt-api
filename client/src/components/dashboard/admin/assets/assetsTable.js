@@ -12,8 +12,11 @@ import {
   Button,
 } from '@material-ui/core';
 
+import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
+
 import { Pagination } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Loading from 'utils/loader';
 
@@ -63,19 +66,32 @@ const AssetsTable = ({ assets, prev, next }) => {
                   <StyledTableCell align="left">ID</StyledTableCell>
                   <StyledTableCell align="left">Asset Name</StyledTableCell>
                   <StyledTableCell align="left">Category</StyledTableCell>
+                  <StyledTableCell align="left">Action</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {assets.docs.map(item => (
                   <StyledTableRow key={item._id}>
-                    <StyledTableCell component="th" scope="row">
+                    <StyledTableCell component="td" scope="row">
                       {item._id}
                     </StyledTableCell>
-                    <StyledTableCell component="th" scope="row">
+                    <StyledTableCell component="td" scope="row">
                       {item.assetName}
                     </StyledTableCell>
-                    <StyledTableCell component="th" scope="row">
+                    <StyledTableCell component="td" scope="row">
                       {item.category}
+                    </StyledTableCell>
+                    <StyledTableCell component="td" scope="row">
+                      <Link style={{ textDecoration: 'none' }}>
+                        <Button variant="contained" color="secondary">
+                          Delete
+                        </Button>
+                      </Link>{' '}
+                      <Link style={{ textDecoration: 'none' }}>
+                        <Button variant="contained" color="primary">
+                          Edit
+                        </Button>
+                      </Link>
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}
@@ -105,7 +121,7 @@ const AssetsTable = ({ assets, prev, next }) => {
               </Pagination>
             ) : null}
           </Pagination>
-          <Link to="/assets/add_asset">
+          <Link to="/assets/add_asset" style={{ textDecoration: 'none' }}>
             <Button
               variant="contained"
               color="primary"

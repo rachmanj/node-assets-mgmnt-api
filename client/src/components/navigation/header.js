@@ -15,8 +15,15 @@ const Header = ({ users, signOutUser }) => {
           </Typography>
           {users.auth ? (
             <>
+              <Link style={{ marginRight: '50px' }}>
+                <Button variant="primary" style={{ color: 'white' }}>
+                  Maintenance
+                </Button>
+              </Link>
               <Link to="/assets" style={{ marginRight: '50px' }}>
-                <Typography style={{ color: 'white' }}>Assets</Typography>
+                <Button variant="primary" style={{ color: 'white' }}>
+                  Assets
+                </Button>
               </Link>
               <Button
                 variant="primary"

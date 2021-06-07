@@ -12,7 +12,7 @@ const defaultValues = {
   assetName: [],
   min: 0,
   max: 5000,
-  page: 2,
+  page: 1,
 };
 
 const AssetsPage = props => {
@@ -36,7 +36,11 @@ const AssetsPage = props => {
   return (
     <>
       <Container component="main" maxWidth="lg">
-        <Typography align="center" variant="h4">
+        <Typography
+          align="center"
+          variant="h4"
+          style={{ marginTop: '10px', marginBottom: '10px' }}
+        >
           Assets List
         </Typography>
         <form className="mt-5">
