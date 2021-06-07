@@ -1,0 +1,23 @@
+.root_loader {
+  text-align: center;
+  margin: 80px;
+}
+
+.root_loader.full {
+  margin: 50vh;
+}
+
+header span {
+  position: absolute;
+  top: 1px;
+  bottom: 2px;
+  color: #ffff;
+  left: -26px;
+  padding: 0px 7px 2px 7px;
+  font-size: 14px;
+}
+
+.header_link {
+  color: #ffff;
+  font-size: 14px;
+}

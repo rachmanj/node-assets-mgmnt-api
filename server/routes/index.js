@@ -1,7 +1,7 @@
 const express = require('express');
 const authRoute = require('./auth.route');
 const usersRoute = require('./users.route');
-const objectPerbaikanRoute = require('./objectPerbaikan.route');
+const assetRoute = require('./asset.route');
 const router = express.Router();
 
 const routesIndex = [
@@ -14,8 +14,8 @@ const routesIndex = [
     route: usersRoute,
   },
   {
-    path: '/objectperbaikan',
-    route: objectPerbaikanRoute,
+    path: '/assets',
+    route: assetRoute,
   },
 ];
 

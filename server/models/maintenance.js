@@ -6,10 +6,9 @@ const maintenanceSchema = mongoose.Schema({
   date: { type: Date, default: Date.now() },
   namaObject: {
     type: Schema.Types.ObjectId,
-    ref: 'ObjekPerbaikan',
+    ref: 'Asset',
     required: true,
   },
-  jenisObject: {}, //peralatan, kendaraan, bangunan
   detailPerbaikan: { type: Array, default: [] },
   pihakPelaksana: { type: String, default: 'Internal' }, //internal atau eksternal
   requestor: { type: String, default: '' },
@@ -23,6 +22,8 @@ const maintenanceSchema = mongoose.Schema({
   receivedBy: { type: String, default: '' },
   receivedDate: { type: Date, default: Date.now() },
 });
+
+maintenanceSchema.plugin(aggregatePaginate);
 
 const Maintenance = mongoose.model('Maintenance', maintenanceSchema);
 module.exports = { Maintenance };
