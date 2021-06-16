@@ -4,8 +4,9 @@ import { Button } from '@material-ui/core';
 
 import AssetsTable from './assetsTable';
 
-import { assetsByPaginate } from 'store/actions/asset.actions';
 import { useDispatch, useSelector } from 'react-redux';
+import { assetsByPaginate } from 'store/actions/asset.actions';
+import { clearCurrentAsset } from 'store/actions/index';
 
 const defaultValues = {
   keywords: '',
@@ -25,6 +26,10 @@ const AssetsPage = props => {
     defaultValues
   );
 
+  const gotoEdit = id => {
+    props.history.push(`/assets/edit_asset/${id}`);
+  };
+
   const gotoPage = page => {
     setSearchValues({ page: page });
   };
@@ -32,6 +37,12 @@ const AssetsPage = props => {
   useEffect(() => {
     dispatch(assetsByPaginate(searchValues));
   }, [dispatch, searchValues]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearCurrentAsset());
+    };
+  }, [dispatch]);
 
   return (
     <>
@@ -59,11 +70,12 @@ const AssetsPage = props => {
         >
           Reset Search
         </Button>
-        <hr />
+        <hr style={{ margin: '20px 0 20px 0' }} />
         <AssetsTable
           assets={assets.byPaginate}
           prev={page => gotoPage(page)}
           next={page => gotoPage(page)}
+          gotoEdit={id => gotoEdit(id)}
         />
       </Container>
     </>

@@ -27,6 +27,20 @@ const getAssetById = async id => {
   }
 };
 
+const updateAssetById = async (_id, body) => {
+  try {
+    const asset = await Asset.findByIdAndUpdate(
+      _id,
+      { $set: body },
+      { new: true }
+    );
+    if (!asset) throw new ApiError(httpStatus.NOT_FOUND, 'Product not found');
+    return asset;
+  } catch (error) {
+    throw error;
+  }
+};
+
 const deleteAssetById = async id => {
   try {
     const asset = await Asset.findByIdAndRemove(id);
@@ -39,7 +53,7 @@ const deleteAssetById = async id => {
 const getAll = async args => {
   try {
     let order = args.order ? args.order : 'desc';
-    let limit = args.limit ? args.limit : 10;
+    let limit = args.limit ? args.limit : 10000;
 
     const assets = await Asset.find({})
       .sort([['_id', order]])
@@ -67,7 +81,7 @@ const paginateAll = async req => {
     let aggQuery = Asset.aggregate(aggQueryArray);
     const options = {
       page: req.body.page,
-      limit: 5,
+      limit: 10,
       sort: { date: 'desc' },
     };
     const assets = await Asset.aggregatePaginate(aggQuery, options);
@@ -80,6 +94,7 @@ const paginateAll = async req => {
 module.exports = {
   addAsset,
   getAssetById,
+  updateAssetById,
   deleteAssetById,
   getAll,
   paginateAll,

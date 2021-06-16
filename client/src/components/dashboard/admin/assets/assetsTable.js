@@ -12,9 +12,6 @@ import {
   Button,
 } from '@material-ui/core';
 
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-
 import { Pagination } from 'react-bootstrap';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -44,7 +41,7 @@ const useStyles = makeStyles({
   },
 });
 
-const AssetsTable = ({ assets, prev, next }) => {
+const AssetsTable = ({ assets, prev, next, gotoEdit }) => {
   const classes = useStyles();
 
   const goToPrevPage = page => {
@@ -82,16 +79,23 @@ const AssetsTable = ({ assets, prev, next }) => {
                       {item.category}
                     </StyledTableCell>
                     <StyledTableCell component="td" scope="row">
-                      <Link style={{ textDecoration: 'none' }}>
-                        <Button variant="contained" color="secondary">
-                          Delete
-                        </Button>
-                      </Link>{' '}
-                      <Link style={{ textDecoration: 'none' }}>
-                        <Button variant="contained" color="primary">
-                          Edit
-                        </Button>
-                      </Link>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        size="small"
+                        style={{ marginRight: '5px' }}
+                        onClick={() => alert('remove')}
+                      >
+                        Delete
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="primary"
+                        size="small"
+                        onClick={() => gotoEdit(item._id)}
+                      >
+                        Edit
+                      </Button>
                     </StyledTableCell>
                   </StyledTableRow>
                 ))}

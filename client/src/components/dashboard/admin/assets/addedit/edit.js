@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import * as Yup from 'yup';
 
 import { useFormik } from 'formik';
 import { errorHelper } from 'utils/tools';
 import Loader from 'utils/loader';
-import { validation } from './formValues';
+import { validation, formValues, getValuesToEdit } from './formValues';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { assetAdd } from 'store/actions/asset.actions';
+import { assetEdit, getAssetById } from 'store/actions/asset.actions';
+import { clearCurrentAsset } from 'store/actions/index';
 
 import {
   Container,
@@ -21,16 +21,16 @@ import {
   Button,
 } from '@material-ui/core';
 
-const AddAsset = props => {
+const EditAsset = props => {
+  const [values, setValues] = useState(formValues);
   const [loading, setLoading] = useState(false);
+  const assets = useSelector(state => state.assets);
   const notifications = useSelector(state => state.notifications);
   const dispatch = useDispatch();
 
   const formik = useFormik({
-    initialValues: {
-      assetName: '',
-      category: '',
-    },
+    enableReinitialize: true,
+    initialValues: values,
     validationSchema: validation,
     onSubmit: values => {
       handleSubmit(values);
@@ -39,17 +39,34 @@ const AddAsset = props => {
 
   const handleSubmit = values => {
     setLoading(true);
-    dispatch(assetAdd(values));
+    dispatch(assetEdit(values, props.match.params.id));
+    // dispatch(dispatch(clearCurrentAsset()));
   };
 
   useEffect(() => {
-    if (notifications && notifications.success) {
-      props.history.push('/assets');
-    }
-    if (notifications && notifications.error) {
+    if (notifications) {
       setLoading(false);
     }
-  }, [notifications, props.history]);
+  }, [notifications]);
+
+  useEffect(() => {
+    const param = props.match.params.id;
+    if (param) {
+      dispatch(getAssetById(param));
+    }
+  }, [dispatch, props.match.params.id]);
+
+  useEffect(() => {
+    if (assets && assets.byId) {
+      setValues(getValuesToEdit(assets.byId));
+    }
+  }, [assets]);
+
+  useEffect(() => {
+    return () => {
+      dispatch(clearCurrentAsset());
+    };
+  }, [dispatch]);
 
   return (
     <>
@@ -77,21 +94,11 @@ const AddAsset = props => {
                     : false
                 }
               >
-                <MenuItem value="">
-                  <em>None</em>
-                </MenuItem>
-                <MenuItem value="Peralatan">
-                  <em>Peralatan</em>
-                </MenuItem>
-                <MenuItem value="Kendaraan">
-                  <em>Kendaraan</em>
-                </MenuItem>
-                <MenuItem value="Bangunan">
-                  <em>Bangunan</em>
-                </MenuItem>
-                <MenuItem value="Utilities">
-                  <em>Utilities</em>
-                </MenuItem>
+                <MenuItem value="">None</MenuItem>
+                <MenuItem value="Peralatan">Peralatan</MenuItem>
+                <MenuItem value="Kendaraan">Kendaraan</MenuItem>
+                <MenuItem value="Bangunan">Bangunan</MenuItem>
+                <MenuItem value="Utilities">Utilities</MenuItem>
               </Select>
               {formik.errors.category && formik.touched.category ? (
                 <FormHelperText error={true}>
@@ -115,4 +122,4 @@ const AddAsset = props => {
   );
 };
 
-export default AddAsset;
+export default EditAsset;

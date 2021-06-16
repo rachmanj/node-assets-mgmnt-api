@@ -10,14 +10,14 @@ const allRights = {
 let grantsObject = {
   admin: {
     profile: allRights,
-    assets: allRights,
+    asset: allRights,
   },
   user: {
     profile: {
       'read:own': ['*', '!password', '!_id'],
       'update:own': ['*'],
     },
-    assets: {
+    asset: {
       'read:any': ['*'],
       'create:any': ['*'],
     },

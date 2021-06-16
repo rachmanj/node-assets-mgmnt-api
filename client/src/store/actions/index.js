@@ -5,7 +5,9 @@ import {
   AUTH_USER,
   SIGN_OUT,
   GET_ASSETS_PAGINATE,
+  GET_ASSET_BY_ID,
   ASSET_ADD,
+  CLEAR_CURRENT_ASSET,
 } from '../types';
 
 // USERS
@@ -24,9 +26,18 @@ export const assetsByPaginate = assets => ({
   payload: assets,
 });
 
+export const getAssetById = asset => ({
+  type: GET_ASSET_BY_ID,
+  payload: asset,
+});
+
 export const assetAdd = asset => ({
   type: ASSET_ADD,
   payload: asset,
+});
+
+export const clearCurrentAsset = () => ({
+  type: CLEAR_CURRENT_ASSET,
 });
 
 /// NOTIFICATIONS

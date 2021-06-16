@@ -19,6 +19,15 @@ const assetsController = {
       next(error);
     }
   },
+  async updateAssetById(req, res, next) {
+    try {
+      const _id = req.params.id;
+      const asset = await assetService.updateAssetById(_id, req.body);
+      res.json(asset);
+    } catch (error) {
+      next(error);
+    }
+  },
   async deleteAssetById(req, res, next) {
     try {
       const id = req.params.id;

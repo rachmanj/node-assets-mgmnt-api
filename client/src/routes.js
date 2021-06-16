@@ -14,6 +14,7 @@ import RegisterLogin from 'components/auth';
 import Dashboard from 'components/dashboard';
 import AssetsPage from 'components/dashboard/admin/assets';
 import AddAsset from 'components/dashboard/admin/assets/addedit/add';
+import EditAsset from 'components/dashboard/admin/assets/addedit/edit';
 
 const Routes = props => {
   const [loading, setLoading] = useState(true);
@@ -43,6 +44,11 @@ const Routes = props => {
           <Header users={users} signOutUser={signOutUser} />
           <MainLayout>
             <Switch>
+              <Route
+                path="/assets/edit_asset/:id"
+                component={AuthGuard(EditAsset)}
+                exact
+              />
               <Route
                 path="/assets/add_asset"
                 component={AuthGuard(AddAsset)}

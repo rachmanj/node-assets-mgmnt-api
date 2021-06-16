@@ -5,9 +5,15 @@ export const formValues = {
   category: '',
 };
 
-export const validation = () => {
-  Yup.object({
-    assetName: Yup.string().required('The field is required'),
-    category: Yup.string(),
-  });
+export const getValuesToEdit = asset => {
+  return {
+    assetName: asset.assetName,
+    category: asset.category,
+  };
 };
+
+export const validation = () =>
+  Yup.object({
+    assetName: Yup.string().required('This field is required'),
+    category: Yup.string().required('This field isrequired'),
+  });

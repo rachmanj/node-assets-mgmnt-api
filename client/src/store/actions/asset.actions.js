@@ -28,3 +28,25 @@ export const assetAdd = data => {
     }
   };
 };
+
+export const getAssetById = id => {
+  return async dispatch => {
+    try {
+      const asset = await axios.get(`/api/assets/${id}`);
+      dispatch(actions.getAssetById(asset.data));
+    } catch (error) {
+      dispatch(actions.errorGlobal(error.response.data.message));
+    }
+  };
+};
+
+export const assetEdit = (values, id) => {
+  return async dispatch => {
+    try {
+      await axios.patch(`/api/assets/${id}`, values, getAuthHeader());
+      dispatch(actions.successGlobal('Update success !!'));
+    } catch (error) {
+      dispatch(actions.errorGlobal(error.response.data.message));
+    }
+  };
+};
