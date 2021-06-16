@@ -4,7 +4,7 @@ const aggregatePaginate = require('mongoose-aggregate-paginate-v2');
 
 const maintenanceSchema = mongoose.Schema({
   date: { type: Date, default: Date.now() },
-  namaObject: {
+  assetName: {
     type: Schema.Types.ObjectId,
     ref: 'Asset',
     required: true,
