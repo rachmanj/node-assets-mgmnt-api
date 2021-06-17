@@ -1,6 +1,7 @@
 const { Maintenance } = require('../models/maintenance');
 const { ApiError } = require('../middleware/apiError');
 const httpStatus = require('http-status');
+const mongoose = require('mongoose');
 
 const addMaintenance = async body => {
   try {
@@ -26,7 +27,47 @@ const allMaintenances = async req => {
   }
 };
 
+const paginateMaintenances = async req => {
+  try {
+    let aggQueryArray = [];
+
+    if (req.body.asset && req.body.asset.length > 0) {
+      let newAssetsArray = req.body.asset.map(item =>
+        mongoose.Types.ObjectId(item)
+      );
+      aggQueryArray.push({
+        $match: { asset: { $in: newAssetsArray } },
+      });
+    }
+
+    //// add populate
+    aggQueryArray.push(
+      {
+        $lookup: {
+          from: 'assets',
+          localField: 'asset',
+          foreignField: '_id',
+          as: 'asset',
+        },
+      },
+      { $unwind: '$asset' }
+    );
+
+    let aggQuery = Maintenance.aggregate(aggQueryArray);
+    const options = {
+      page: req.body.page,
+      limit: 6,
+      sort: { date: 'desc' },
+    };
+    const maintenances = await Maintenance.aggregatePaginate(aggQuery, options);
+    return maintenances;
+  } catch (error) {
+    throw error;
+  }
+};
+
 module.exports = {
   addMaintenance,
   allMaintenances,
+  paginateMaintenances,
 };

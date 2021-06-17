@@ -81,20 +81,20 @@ const AssetsTable = ({ assets, prev, next, gotoEdit }) => {
                     <StyledTableCell component="td" scope="row">
                       <Button
                         variant="contained"
-                        color="secondary"
-                        size="small"
-                        style={{ marginRight: '5px' }}
-                        onClick={() => alert('remove')}
-                      >
-                        Delete
-                      </Button>
-                      <Button
-                        variant="contained"
                         color="primary"
                         size="small"
+                        style={{ marginRight: '5px' }}
                         onClick={() => gotoEdit(item._id)}
                       >
                         Edit
+                      </Button>
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        size="small"
+                        onClick={() => alert('remove')}
+                      >
+                        Delete
                       </Button>
                     </StyledTableCell>
                   </StyledTableRow>

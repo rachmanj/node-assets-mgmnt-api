@@ -47,13 +47,11 @@ const AssetsPage = props => {
   return (
     <>
       <Container component="main" maxWidth="lg">
-        <Typography
-          align="center"
-          variant="h4"
-          style={{ marginTop: '10px', marginBottom: '10px' }}
-        >
-          Assets List
-        </Typography>
+        <div className="page_title_wrapper">
+          <Typography align="center" variant="h4">
+            Assets List
+          </Typography>
+        </div>
         <form className="mt-5">
           <TextField
             style={{ width: '100%' }}

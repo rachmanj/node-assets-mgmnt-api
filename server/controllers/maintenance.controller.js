@@ -17,6 +17,14 @@ const maintenanceController = {
       next(error);
     }
   },
+  async paginateMaintenances(req, res, next) {
+    try {
+      const maintenances = await maintenanceService.paginateMaintenances(req);
+      res.json(maintenances);
+    } catch (error) {
+      next(error);
+    }
+  },
 };
 
 module.exports = maintenanceController;

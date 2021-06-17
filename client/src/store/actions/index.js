@@ -8,6 +8,8 @@ import {
   GET_ASSET_BY_ID,
   ASSET_ADD,
   CLEAR_CURRENT_ASSET,
+  MAINTENANCE_ADD,
+  MAINTENANCE_GET_ALL,
 } from '../types';
 
 // USERS
@@ -38,6 +40,17 @@ export const assetAdd = asset => ({
 
 export const clearCurrentAsset = () => ({
   type: CLEAR_CURRENT_ASSET,
+});
+
+/// MAINTENANCE
+export const maintenanceAdd = maintenance => ({
+  type: MAINTENANCE_ADD,
+  payload: maintenance,
+});
+
+export const maintenanceGetAll = maintenances => ({
+  type: MAINTENANCE_GET_ALL,
+  payload: maintenances,
 });
 
 /// NOTIFICATIONS

@@ -15,12 +15,12 @@ const Header = ({ users, signOutUser }) => {
     <div>
       <AppBar position="fixed">
         <Toolbar styles={{ flex: '1' }}>
-          <Typography type="title" color="inherit" style={{ flex: 1 }}>
+          <Typography variant="h5" color="inherit" style={{ flex: 1 }}>
             Pratasaba Resort
           </Typography>
           {users.auth ? (
             <>
-              <Link style={{ marginRight: '50px' }}>
+              <Link to="/maintenance" style={{ marginRight: '50px' }}>
                 <Button variant="primary" style={{ color: 'white' }}>
                   Maintenance
                 </Button>

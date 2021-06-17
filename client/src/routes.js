@@ -15,6 +15,7 @@ import Dashboard from 'components/dashboard';
 import AssetsPage from 'components/dashboard/admin/assets';
 import AddAsset from 'components/dashboard/admin/assets/addedit/add';
 import EditAsset from 'components/dashboard/admin/assets/addedit/edit';
+import MaintenancePage from 'components/maintenance';
 
 const Routes = props => {
   const [loading, setLoading] = useState(true);
@@ -53,6 +54,10 @@ const Routes = props => {
                 path="/assets/add_asset"
                 component={AuthGuard(AddAsset)}
                 exact
+              />
+              <Route
+                path="/maintenance"
+                component={AuthGuard(MaintenancePage)}
               />
               <Route path="/assets" component={AuthGuard(AssetsPage)} />
               <Route
